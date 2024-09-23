@@ -1,0 +1,65 @@
+saldo = 0
+cont = 0
+extrato ="-----------------Extrato-----------------"
+
+def depositar( ):
+    global saldo, extrato
+    try:
+        deposito = float(input("Digite o valor do seu depósito: "))
+        saldo += deposito
+        extrato = extrato + f'\nDepósito________________________+ R${deposito}'
+    except:
+        print("falha na tentativa de depósito")
+    
+def sacar( ):
+    global saldo, extrato, cont
+    saque = float(input("Digite o valor do seu saque: "))
+    if saque <= saldo and cont < 3:
+        saldo -= saque
+        extrato = extrato + f'\nSaque___________________________- R${saque}'
+    elif saque > saldo:
+        print("Valor indisponível")
+    elif cont >= 3:
+        print("Limite de saques excedido")
+    else:
+        print("falha ao executar a ação")
+        
+def verextrato( ):
+    global extrato, saldo
+    try:
+        print(extrato)
+        print(f'Saldo final_____________________R$ {saldo}')
+    except:
+        print("falha ao executar a ação")
+
+def menu( ):
+    print("""
+      
+      
+-----------------Menu----------------
+Escolha a opção desejada:
+
+1-Depositar
+2-Sacar
+3-Consultar Extrato
+4-sair
+-------------------------------------
+""")
+    opc = int(input("Opção: "))
+    return opc
+
+def main( ):
+    while True:
+        opc = menu( )
+        match opc:
+            case 1:
+                depositar( )
+            case 2:
+                sacar( )
+            case 3:
+                verextrato( )
+            case 4:
+                break
+    print("Encerrando")
+    
+main( )
